@@ -44,12 +44,14 @@ public class Film {
     @ColumnDefault("now()")
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
-    @Column(name = "special_features",columnDefinition = "enum('Trailers','Commentaries','Deleted Scenes','Behind the Scenes')")
+
+
+    @Column(name = "special_features",columnDefinition = "TEXT[]")
     private List<String> specialFeatures;
 
-    @Basic
-    @Column(name="rating",columnDefinition = "enum('G','PG','PG-13','R','NC-17')")
-    private Object rating;
+    @Enumerated(EnumType.STRING)
+    @Column(name="rating")
+    private FilmRating rating;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
@@ -142,6 +144,14 @@ public class Film {
 
     public void setSpecialFeatures(List<String> specialFeatures) {
         this.specialFeatures = specialFeatures;
+    }
+
+    public FilmRating getRating() {
+        return rating;
+    }
+
+    public void setRating(FilmRating rating) {
+        this.rating = rating;
     }
 
 /*

@@ -2,7 +2,7 @@ quarkus:
   datasource:
     jdbc:
       driver: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/movies
+      url: jdbc:postgresql://localhost:5432/movies?currentSchema=public
     username: dev_user
     password: Password123
   hibernate-orm:
