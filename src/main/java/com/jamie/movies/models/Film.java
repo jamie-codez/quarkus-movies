@@ -5,6 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -49,6 +50,19 @@ public class Film {
     @Basic
     @Column(name="rating",columnDefinition = "enum('G','PG','PG-13','R','NC-17')")
     private Object rating;
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = {@JoinColumn(name = "film_id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id")}
+    )
+    private List<Actor> actors = new ArrayList<>();
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
 
     public Integer getId() {
         return id;

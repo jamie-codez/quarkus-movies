@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "actor", schema = "public")
@@ -23,6 +25,10 @@ public class Actor {
     @ColumnDefault("now()")
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
+    @ManyToMany(mappedBy = "actors")
+    private Set<Film> films = new HashSet<>();
+
 
     public Integer getId() {
         return id;
@@ -56,4 +62,11 @@ public class Actor {
         this.lastUpdate = lastUpdate;
     }
 
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Film> films) {
+        this.films = films;
+    }
 }
