@@ -1,0 +1,12 @@
+quarkus:
+  datasource:
+    jdbc:
+      driver: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/movies
+    username: dev_user
+    password: Password123
+  hibernate-orm:
+    log:
+      format-sql: true
+      sql: true
+
